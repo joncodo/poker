@@ -5,7 +5,6 @@ class Game
     @player1 = Player.new('Bill')
     @player2 = Player.new('Laura')
     @deck = Deck.new
-    @deck.shuffle
     @middle_cards = []
   end
 
