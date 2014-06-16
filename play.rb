@@ -8,10 +8,11 @@ game.deal_round
 
 puts 'Here are the player cards'
 puts ''
-game.player1.show_cards
+
+puts game.show_cards_string('Player1', game.player1.cards)
 puts ''
-game.player2.show_cards
+puts game.show_cards_string('Player2', game.player2.cards)
 
 game.deal_middle_cards
 puts ''
-puts game.show_middle_cards
+puts game.show_cards_string('Middle', game.middle_cards)

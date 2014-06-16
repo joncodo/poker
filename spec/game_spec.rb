@@ -3,6 +3,7 @@ require 'game.rb'
 describe Game do
   before(:each) do
     @game = Game.new
+    @game.deal_round
   end
 
   describe Game, '#' do
@@ -18,7 +19,6 @@ describe Game do
 
   describe Game, '#deal_round' do
     it 'deals two cards to each player' do
-      @game.deal_round
       expect(@game.player1.cards.count).to eq 2
       expect(@game.player2.cards.count).to eq 2
     end
@@ -26,17 +26,14 @@ describe Game do
 
   describe Game, '#deal_middle_cards' do
     it 'deals two cards to each player' do
-      @game.deal_round
       @game.deal_middle_cards
       expect(@game.middle_cards.count).to eq 5
     end
   end
 
-  describe Game, '#show_middle_cards' do
-    it 'prints out the middle cards' do
-      @game.deal_round
-      @game.deal_middle_cards
-      expect(@game.show_middle_cards.nil?).to eq false
+  describe Game, '#show_cards' do
+    it 'should have print out the cards that it is passed' do
+      expect(@game.show_cards_string('PlayerTest', @game.player1.cards).nil?).to eq false
     end
   end
 end

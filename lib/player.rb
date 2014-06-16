@@ -4,11 +4,4 @@ class Player
     @name = name
     @cards = []
   end
-
-  def show_cards
-    puts @name + "'s cards:"
-    @cards.each do |card|
-      puts card.display_value
-    end
-  end
 end

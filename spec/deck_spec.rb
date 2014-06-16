@@ -9,13 +9,21 @@ describe Deck do
     it 'should have a fresh deck of 52 cards' do
       expect(@deck.cards.count).to eq 52
     end
+
+    it 'should have the correct names for card display values' do
+      expect(@deck.cards.first.display_value).to eq ('A-Clubs')
+    end
   end
 
   describe Deck, '#deal' do
     it 'should deal a single card' do
-      expect(@deck.cards.count).to eq 52
-      @deck.deal
+      @deck.deal(1)
       expect(@deck.cards.count).to eq 51
+    end
+
+    it 'should deal multiple cards' do
+      @deck.deal(5)
+      expect(@deck.cards.count).to eq 47
     end
   end
 end

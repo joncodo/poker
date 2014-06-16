@@ -9,28 +9,20 @@ class Game
   end
 
   def deal_round
-    #deal the first card
-    @player1.cards << @deck.deal
-    @player2.cards << @deck.deal
-
-    #deal the second card
-    @player1.cards << @deck.deal
-    @player2.cards << @deck.deal
+    @player1.cards = @deck.deal(2)
+    @player2.cards = @deck.deal(2)
   end
 
   def deal_middle_cards
-    @middle_cards << @deck.deal
-    @middle_cards << @deck.deal
-    @middle_cards << @deck.deal
-    @middle_cards << @deck.deal
-    @middle_cards << @deck.deal
+    @middle_cards = @deck.deal(5)
   end
 
-  def show_middle_cards
-    puts 'The middle cards are:'
-    @middle_cards.each do |card|
-      puts card.display_value
+  def show_cards_string(object_name, cards)
+    return_string = ''
+    return_string << object_name + " cards are: \n"
+    cards.each do |card|
+      return_string << card.display_value + "\n"
     end
-    nil
+    return_string
   end
 end
