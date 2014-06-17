@@ -25,14 +25,14 @@ describe Game do
   end
 
   describe Game, '#deal_middle_cards' do
-    it 'deals two cards to each player' do
+    it 'deals five cards to the middle' do
       @game.deal_middle_cards
       expect(@game.middle_cards.count).to eq 5
     end
   end
 
   describe Game, '#show_cards' do
-    it 'should have print out the cards that it is passed' do
+    it 'should print out the cards that it is passed' do
       expect(@game.show_cards_string('PlayerTest', @game.player1.cards).nil?).to eq false
     end
   end

@@ -15,9 +15,9 @@ class Win
   end
 
   def hand_rank(cards)
-    index = 1
+    index = 0
     if is_royal_flush?(cards)
-      index = 10
+      index = 9
     end
     #TODO add all the hand checks
 
@@ -26,5 +26,28 @@ class Win
 
   def is_royal_flush?(cards)
 
+
   end
+
+  def is_flush?(cards)
+    suits = cards.map(&:suit)
+    suits.uniq.count == 1
+  end
+
+  def is_straight?(cards)
+    #sort all the cards first
+    cards = sort_cards(cards)
+    numbers = cards.map(&:number)
+
+    #get the lowest card index
+    all_numbers = Deck::NUMBERS
+    all_numbers_hash = Hash[all_numbers.map.with_index.to_a]
+    first_number_index = all_numbers_hash[numbers.first]
+
+    numbers.each_with_index do |number, idx|
+      puts number
+    end
+  end
+
+
 end
