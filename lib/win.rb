@@ -24,12 +24,21 @@ class Win
       index = 8
     elsif is_four_of_a_kind?(cards)
       index = 7
+    elsif is_full_house?(cards)
+      index = 6
+    elsif is_flush?(cards)
+      index = 5
+    elsif is_straight?(cards)
+      index = 4
     elsif is_three_of_a_kind?(cards)
       index = 3
-    elsif is_pair?(cards)
+    elsif is_two_pair?(cards)
       index = 2
+    elsif is_one_pair?(cards)
+      index = 1
+    elsif is_high_card?(cards)
+      index = 0
     end
-    #TODO add all the hand checks
 
     [index, Win::HANDS[index]]
   end
@@ -46,16 +55,9 @@ class Win
     matched_desired_pairs?(cards, 4)
   end
 
-  def is_three_of_a_kind?(cards)
-    matched_desired_pairs?(cards, 3)
-  end
-
-  def is_pair?(cards)
-    matched_desired_pairs?(cards, 2)
-  end
-
-  def is_high_card?(cards)
-    matched_desired_pairs?(cards, 1)
+  def is_full_house?(cards)
+    #TODO
+    throw NotImplementedError
   end
 
   def is_flush?(cards)
@@ -65,6 +67,23 @@ class Win
 
   def is_straight?(cards)
     Sorter.is_straight?(cards)
+  end
+
+  def is_three_of_a_kind?(cards)
+    matched_desired_pairs?(cards, 3)
+  end
+
+  def is_two_pair?(cards)
+    #TODO
+    throw NotImplementedError
+  end
+
+  def is_one_pair?(cards)
+    matched_desired_pairs?(cards, 2)
+  end
+
+  def is_high_card?(cards)
+    matched_desired_pairs?(cards, 1)
   end
 
   private

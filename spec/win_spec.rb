@@ -78,17 +78,17 @@ describe Win do
     end
   end
 
-  describe '#is_pair?' do
+  describe '#is_one_pair?' do
     it 'should detect a pair' do
       cards = [Card.new('K'), Card.new('K'), Card.new('Q'), Card.new('4'),
                Card.new('3'), Card.new('5'), Card.new('7')]
-      expect(@win.is_pair?(cards)).to eq true
+      expect(@win.is_one_pair?(cards)).to eq true
     end
 
     it 'should not detect a non pair' do
       cards = [Card.new('K'), Card.new('J'), Card.new('Q'), Card.new('10'),
                Card.new('3'), Card.new('4'), Card.new('7')]
-      expect(@win.is_pair?(cards)).to eq false
+      expect(@win.is_one_pair?(cards)).to eq false
     end
   end
 
