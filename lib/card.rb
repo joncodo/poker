@@ -1,7 +1,7 @@
 class Card
   attr_accessor :suit, :number, :display_value
 
-  def initialize(number='Spades', suit)
+  def initialize(number, suit='Spades')
     @number = number
     @suit = suit
     @display_value = number.to_s + '-' + suit.to_s

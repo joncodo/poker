@@ -1,26 +1,43 @@
 require_relative 'deck.rb'
 
 module Sorter
-  def self.sort_cards(cards)
-    ints = %w(1 2 3 4 5 6 7 8 9 10 11 12 13 1)
+  def self.is_straight?(cards)
     card_ints = Sorter.convert_cards_to_ints(cards)
+    card_ints.sort!
 
-    #TODO sort for ace at the end and at the first
-    #TODO convert them back to real cards in order
-    #TODO the straight test
-    #Todo the royal flush test
-    #TODO refactor the constants into a constants class
+    straight_count = 0
+    successful_matches_needed = 4
 
-    puts ints.inspect
+    card_ints.each_with_index do |card, index|
 
-    # positions = []
-    # cards.each do |card|
-    #   positions << all_numbers_hash[card.number]
-    # end
+      if (index+1) < card_ints.count
+        next_number = card_ints[index + 1]
+      else
+        next_number = card_ints.last
+      end
+
+      if card + 1 == next_number
+        straight_count += 1
+      else
+        straight_count = 0 unless straight_count == successful_matches_needed
+      end
+    end
+
+    if straight_count >= successful_matches_needed || self.is_high_straight?(cards)
+      return true
+    else
+      return false
+    end
+  end
+
+  def self.is_high_straight?(cards)
+    card_ints = Sorter.convert_cards_to_ints(cards)
+    card_ints.sort!
+    match_array = [10, 11, 12, 13, 1]
+    (match_array-card_ints).empty?
   end
 
   def self.convert_cards_to_ints(cards)
-    #TODO test this method
     int_array = []
     cards.each do |card|
       if card.number == 'A'
@@ -32,8 +49,9 @@ module Sorter
       elsif card.number == 'K'
         int_array<<13
       else
-        int_array<<card.number
+        int_array<<card.number.to_i
       end
     end
+    int_array
   end
 end

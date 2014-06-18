@@ -2,29 +2,33 @@ require 'sorter.rb'
 require 'card.rb'
 
 describe Sorter do
-  describe '#sort_cards' do
-    it 'should sort the cards by number' do
-      cards = [Card.new('5'), Card.new('2'), Card.new('7')]
-      sorted_cards = [Card.new('2'), Card.new('5'), Card.new('7')]
-      expect(Sorter.sort_cards(cards)).to eq sorted_cards
+  describe '#is_straight?' do
+    it 'should not detect a non straight' do
+      cards = [Card.new('5'), Card.new('2'), Card.new('7'), Card.new('8'),
+               Card.new('10'), Card.new('A'), Card.new('K')]
+      expect(Sorter.is_straight?(cards)).to eq false
     end
 
-    it 'should sort the cards by number and letters' do
-      cards = [Card.new('5'), Card.new('2'), Card.new('J')]
-      sorted_cards = [Card.new('2'), Card.new('5'), Card.new('J')]
-      expect(Sorter.sort_cards(cards)).to eq sorted_cards
+    it 'should detect a straight' do
+      cards = [Card.new('3'), Card.new('2'), Card.new('4'), Card.new('8'),
+               Card.new('10'), Card.new('A'), Card.new('5')]
+      expect(Sorter.is_straight?(cards)).to eq true
     end
 
-    it 'should sort with ace at the first' do
-      cards = [Card.new('3'), Card.new('2'), Card.new('A')]
-      sorted_cards = [Card.new('A'), Card.new('2'), Card.new('3')]
-      expect(Sorter.sort_cards(cards)).to eq sorted_cards
+    it 'should detect a straight with ace at the end' do
+      cards = [Card.new('J'), Card.new('10'), Card.new('7'), Card.new('8'),
+               Card.new('Q'), Card.new('A'), Card.new('K')]
+      expect(Sorter.is_straight?(cards)).to eq true
     end
+  end
 
-    it 'should sort with ace at the end' do
-      cards = [Card.new('A'), Card.new('K'), Card.new('Q')]
-      sorted_cards = [Card.new('Q'), Card.new('K'), Card.new('A')]
-      expect(Sorter.sort_cards(cards)).to eq sorted_cards
+  describe '#convert_cards_to_ints' do
+    it 'should return the int equivalent for cards' do
+      cards = [Card.new('K')]
+      expect(Sorter.convert_cards_to_ints(cards)).to eq [13]
+
+      cards = [Card.new('K'), Card.new('Q'), Card.new('3')]
+      expect(Sorter.convert_cards_to_ints(cards)).to eq [13, 12, 3]
     end
   end
 end
