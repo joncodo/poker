@@ -7,8 +7,11 @@ module Sorter
 
     straight_count = 0
     successful_matches_needed = 4
+    current_card = nil
 
     card_ints.each_with_index do |card, index|
+      #dont check the same card value twice
+      next if card == current_card
 
       if (index+1) < card_ints.count
         next_number = card_ints[index + 1]
@@ -21,6 +24,7 @@ module Sorter
       else
         straight_count = 0 unless straight_count == successful_matches_needed
       end
+      current_card = card
     end
 
     if straight_count >= successful_matches_needed || self.is_high_straight?(cards)
