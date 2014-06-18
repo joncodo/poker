@@ -30,8 +30,7 @@ describe Win do
 
   describe '#is_royal_flush?' do
     it 'should only detect a royal flush' do
-      #Todo
-      #expect(@win.is_royal_flush?(@royal_flush_hand)).to eq true
+      expect(@win.is_royal_flush?(@royal_flush_hand)).to eq true
     end
   end
 
