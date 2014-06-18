@@ -55,20 +55,48 @@ describe Win do
       cards = [Card.new('K'), Card.new('K'), Card.new('K'), Card.new('K'),
                Card.new('3'), Card.new('3'), Card.new('7')]
       expect(@win.is_four_of_a_kind?(cards)).to eq true
-
-      cards = [Card.new('K'), Card.new('K'), Card.new('K'), Card.new('K'),
-               Card.new('3'), Card.new('4'), Card.new('7')]
-      expect(@win.is_four_of_a_kind?(cards)).to eq true
-
-      cards = [Card.new('K'), Card.new('K'), Card.new('K'), Card.new('K'),
-               Card.new('3'), Card.new('3'), Card.new('3')]
-      expect(@win.is_four_of_a_kind?(cards)).to eq true
     end
 
     it 'should not detect a full house' do
       cards = [Card.new('K'), Card.new('K'), Card.new('K'), Card.new('8'),
                Card.new('3'), Card.new('3'), Card.new('7')]
       expect(@win.is_four_of_a_kind?(cards)).to eq false
+    end
+  end
+
+  describe '#is_three_of_a_kind' do
+    it 'should detect 3 of a kind' do
+      cards = [Card.new('K'), Card.new('K'), Card.new('Q'), Card.new('K'),
+               Card.new('3'), Card.new('3'), Card.new('7')]
+      expect(@win.is_three_of_a_kind?(cards)).to eq true
+    end
+
+    it 'should not detect a non three of a kind' do
+      cards = [Card.new('K'), Card.new('K'), Card.new('Q'), Card.new('Q'),
+               Card.new('3'), Card.new('3'), Card.new('7')]
+      expect(@win.is_three_of_a_kind?(cards)).to eq false
+    end
+  end
+
+  describe '#is_pair?' do
+    it 'should detect a pair' do
+      cards = [Card.new('K'), Card.new('K'), Card.new('Q'), Card.new('4'),
+               Card.new('3'), Card.new('5'), Card.new('7')]
+      expect(@win.is_pair?(cards)).to eq true
+    end
+
+    it 'should not detect a non pair' do
+      cards = [Card.new('K'), Card.new('J'), Card.new('Q'), Card.new('10'),
+               Card.new('3'), Card.new('4'), Card.new('7')]
+      expect(@win.is_pair?(cards)).to eq false
+    end
+  end
+
+  describe '#is_high_card?' do
+    it 'should detect a high card hand' do
+      cards = [Card.new('K'), Card.new('2'), Card.new('Q'), Card.new('4'),
+               Card.new('3'), Card.new('5'), Card.new('7')]
+      expect(@win.is_high_card?(cards)).to eq true
     end
   end
 end
