@@ -25,8 +25,7 @@ class Win
   end
 
   def is_royal_flush?(cards)
-
-
+    Sorter.is_high_straight?(cards) && is_flush?(cards)
   end
 
   def is_flush?(cards)
@@ -35,19 +34,6 @@ class Win
   end
 
   def is_straight?(cards)
-    #sort all the cards first
-    cards = sort_cards(cards)
-    numbers = cards.map(&:number)
-
-    #get the lowest card index
-    all_numbers = Deck::NUMBERS
-    all_numbers_hash = Hash[all_numbers.map.with_index.to_a]
-    first_number_index = all_numbers_hash[numbers.first]
-
-    numbers.each_with_index do |number, idx|
-      puts number
-    end
+    Sorter.is_straight?(cards)
   end
-
-
 end

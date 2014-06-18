@@ -48,9 +48,5 @@ describe Win do
     it 'should return true for a straight of cards' do
       expect(@win.is_straight?(@royal_flush_hand)).to eq true
     end
-
-    it 'should return false for not a straight' do
-      expect(@win.is_straight?(@royal_flush_hand)).to eq false
-    end
   end
 end
