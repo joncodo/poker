@@ -18,6 +18,8 @@ class Win
     index = 0
     if is_royal_flush?(cards)
       index = 9
+    elsif is_straight_flush?(cards)
+      index = 8
     end
     #TODO add all the hand checks
 
@@ -26,6 +28,21 @@ class Win
 
   def is_royal_flush?(cards)
     Sorter.is_high_straight?(cards) && is_flush?(cards)
+  end
+
+  def is_straight_flush?(cards)
+    Sorter.is_straight?(cards) && is_flush?(cards)
+  end
+
+  def is_four_of_a_kind?(cards)
+    cards = cards.map(&:number)
+    total_card_count = cards.count
+
+    pair_count = 0
+    cards.each do |card|
+      pair_count = total_card_count - (cards - [card]).count unless pair_count >= 4
+    end
+    pair_count >= 4
   end
 
   def is_flush?(cards)

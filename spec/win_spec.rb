@@ -49,4 +49,26 @@ describe Win do
       expect(@win.is_straight?(@royal_flush_hand)).to eq true
     end
   end
+
+  describe '#is_four_of_a_kind' do
+    it 'should detect 4 of a kind' do
+      cards = [Card.new('K'), Card.new('K'), Card.new('K'), Card.new('K'),
+               Card.new('3'), Card.new('3'), Card.new('7')]
+      expect(@win.is_four_of_a_kind?(cards)).to eq true
+
+      cards = [Card.new('K'), Card.new('K'), Card.new('K'), Card.new('K'),
+               Card.new('3'), Card.new('4'), Card.new('7')]
+      expect(@win.is_four_of_a_kind?(cards)).to eq true
+
+      cards = [Card.new('K'), Card.new('K'), Card.new('K'), Card.new('K'),
+               Card.new('3'), Card.new('3'), Card.new('3')]
+      expect(@win.is_four_of_a_kind?(cards)).to eq true
+    end
+
+    it 'should not detect a full house' do
+      cards = [Card.new('K'), Card.new('K'), Card.new('K'), Card.new('8'),
+               Card.new('3'), Card.new('3'), Card.new('7')]
+      expect(@win.is_four_of_a_kind?(cards)).to eq false
+    end
+  end
 end
