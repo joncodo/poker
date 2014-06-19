@@ -11,8 +11,18 @@ class Win
   end
 
   def winner_string
-    p1_hand_rank, p1_hand_string, p1_set_cards, p1_other_cards = hand_rank(@player1.cards)
-    p2_hand_rank, p2_hand_string, p2_set_cards, p2_other_cards = hand_rank(@player2.cards)
+    p1_hash = hand_rank(@player1.cards)
+    p2_hash = hand_rank(@player2.cards)
+
+    p1_hand_rank = p1_hash[:hand_rank]
+    p1_hand_string = p1_hash[:hand_string]
+    p1_set_cards = p1_hash[:set_cards]
+    p1_other_cards = p1_hash[:other_cards]
+
+    p2_hand_rank = p2_hash[:hand_rank]
+    p2_hand_string = p2_hash[:hand_string]
+    p2_set_cards = p2_hash[:set_cards]
+    p2_other_cards = p2_hash[:other_cards]
 
     p1_set_rank = hand_set_rank(p1_set_cards)
     p2_set_rank = hand_set_rank(p2_set_cards)
@@ -48,15 +58,22 @@ class Win
       hand_string = p2_hand_string
     end
 
+    #TODO hand_card
+    #TODO high_card
+    hand_card = '5'
+    high_card = '5'
+
     winner + ' has won the round with ' + hand_string +
       ' ' + hand_card + ' ' + high_card + ' high!'
   end
 
   def hand_set_rank(cards)
+    rand(10)
     #returns the rank int
   end
 
   def other_rank(cards)
+    rand(10)
     #returns the rank int
   end
 
@@ -74,7 +91,7 @@ class Win
       index = 7
     elsif is_full_house?(cards)
       index = 6
-    elsif is_flush?(cards).last
+    elsif is_flush?(cards).first
       index = 5
     elsif is_straight?(cards)
       index = 4
@@ -88,17 +105,17 @@ class Win
       index = 0
     end
 
-    {hand_rank: index, hand_string: Win::HANDS[index], set_cards: foo, other_cards: foo}
+    {hand_rank: index, hand_string: Win::HANDS[index], set_cards: true, other_cards: true}
   end
 
   def is_royal_flush?(cards)
-    flush_cards, is_flush = is_flush?(cards)
+    is_flush, flush_cards, other_cards = is_flush?(cards)
     is_straight = Sorter.is_high_straight?(flush_cards)
     is_flush && is_straight
   end
 
   def is_straight_flush?(cards)
-    flush_cards, is_flush = is_flush?(cards)
+    is_flush, flush_cards, other_cards = is_flush?(cards)
     is_straight = Sorter.is_straight?(flush_cards)
     is_flush && is_straight
   end
@@ -129,7 +146,8 @@ class Win
         []
     end
 
-    [return_cards, return_bool]
+    other_cards = cards - return_cards
+    [return_bool, return_cards, other_cards]
   end
 
   def is_straight?(cards)

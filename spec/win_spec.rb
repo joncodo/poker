@@ -45,10 +45,12 @@ describe Win do
                       Card.new('3', 'Hearts'), Card.new('4', 'Diamonds'), Card.new('7')]
   end
 
-  describe '#show_winner_string' do
+  describe '#winner_string' do
     it 'should show the winner string' do
-      expect(@win.winner_string(@win.player1).nil?).to eq false
+      expect(@win.winner_string.nil?).to eq false
     end
+
+    #TODO test everything else
   end
 
   describe '#hand_rank' do
@@ -58,16 +60,35 @@ describe Win do
     end
 
     it 'should return the correct index and hands' do
-      expect(@win.hand_rank(@royal_flush_hand)).to eq ({hand_rank: 9, hand_string: 'RoyalFlush'})
-      expect(@win.hand_rank(@straight_flush_hand)).to eq ({hand_rank: 8, hand_string: 'StraightFlush'})
-      expect(@win.hand_rank(@four_of_a_kind_hand)).to eq ({hand_rank: 7, hand_string: 'FourOfKind'})
-      expect(@win.hand_rank(@full_house_hand)).to eq ({hand_rank: 6, hand_string: 'FullHouse'})
-      expect(@win.hand_rank(@flush_hand)).to eq ({hand_rank: 5, hand_string: 'Flush'})
-      expect(@win.hand_rank(@straight_hand)).to eq ({hand_rank: 4, hand_string: 'Straight'})
-      expect(@win.hand_rank(@three_of_a_kind_hand)).to eq ({hand_rank: 3, hand_string: 'ThreeOfKind'})
-      expect(@win.hand_rank(@two_pair_hand)).to eq ({hand_rank: 2, hand_string: 'TwoPair'})
-      expect(@win.hand_rank(@one_pair_hand)).to eq ({hand_rank: 1, hand_string: 'OnePair'})
-      expect(@win.hand_rank(@high_card_hand)).to eq ({hand_rank: 0, hand_string: 'HighCard'})
+      expect(@win.hand_rank(@royal_flush_hand)[:hand_rank]).to eq 9
+      expect(@win.hand_rank(@royal_flush_hand)[:hand_string]).to eq 'RoyalFlush'
+
+      expect(@win.hand_rank(@straight_flush_hand)[:hand_rank]).to eq 8
+      expect(@win.hand_rank(@straight_flush_hand)[:hand_string]).to eq 'StraightFlush'
+
+      expect(@win.hand_rank(@four_of_a_kind_hand)[:hand_rank]).to eq 7
+      expect(@win.hand_rank(@four_of_a_kind_hand)[:hand_string]).to eq 'FourOfKind'
+
+      expect(@win.hand_rank(@full_house_hand)[:hand_rank]).to eq 6
+      expect(@win.hand_rank(@full_house_hand)[:hand_string]).to eq 'FullHouse'
+
+      expect(@win.hand_rank(@flush_hand)[:hand_rank]).to eq 5
+      expect(@win.hand_rank(@flush_hand)[:hand_string]).to eq 'Flush'
+
+      expect(@win.hand_rank(@straight_hand)[:hand_rank]).to eq 4
+      expect(@win.hand_rank(@straight_hand)[:hand_string]).to eq 'Straight'
+
+      expect(@win.hand_rank(@three_of_a_kind_hand)[:hand_rank]).to eq 3
+      expect(@win.hand_rank(@three_of_a_kind_hand)[:hand_string]).to eq 'ThreeOfKind'
+
+      expect(@win.hand_rank(@two_pair_hand)[:hand_rank]).to eq 2
+      expect(@win.hand_rank(@two_pair_hand)[:hand_string]).to eq 'TwoPair'
+
+      expect(@win.hand_rank(@one_pair_hand)[:hand_rank]).to eq 1
+      expect(@win.hand_rank(@one_pair_hand)[:hand_string]).to eq 'OnePair'
+
+      expect(@win.hand_rank(@high_card_hand)[:hand_rank]).to eq 0
+      expect(@win.hand_rank(@high_card_hand)[:hand_string]).to eq 'HighCard'
     end
   end
 
@@ -99,16 +120,16 @@ describe Win do
 
   describe '#is_flush?' do
     it 'should return true for a flush of cards' do
-      expect(@win.is_flush?(@flush_hand).last).to eq true
+      expect(@win.is_flush?(@flush_hand).first).to eq true
       other_flush_hand = [Card.new('2'), Card.new('2', 'Clubs'),
                           Card.new('9', 'Clubs'), Card.new('10', 'Clubs'),
                           Card.new('7', 'Clubs'), Card.new('2', 'Hearts'),
                           Card.new('K', 'Clubs')]
-      expect(@win.is_flush?(other_flush_hand).last).to eq true
+      expect(@win.is_flush?(other_flush_hand).first).to eq true
     end
 
     it 'should return false for not a flush' do
-      expect(@win.is_flush?(@high_card_hand).last).to eq false
+      expect(@win.is_flush?(@high_card_hand).first).to eq false
     end
   end
 
