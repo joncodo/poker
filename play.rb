@@ -24,3 +24,5 @@ win = Win.new(game.player1, game.player2, game.middle_cards)
 puts ''
 puts 'Player1 has: ' + win.hand_rank(game.player1.cards + game.middle_cards)[:hand_string]
 puts 'Player2 has: ' + win.hand_rank(game.player2.cards + game.middle_cards)[:hand_string]
+
+
