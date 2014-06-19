@@ -30,8 +30,9 @@ describe Win do
     @flush_hand = [Card.new('K'), Card.new('A'), Card.new('K'), Card.new('8'),
                              Card.new('4'), Card.new('3'), Card.new('7')]
 
-    @straight_hand = [Card.new('K'), Card.new('A', 'Clubs'), Card.new('Q'), Card.new('J'),
-                   Card.new('10'), Card.new('3'), Card.new('7')]
+    @straight_hand = [Card.new('K'), Card.new('A', 'Clubs'), Card.new('Q', 'Hearts'),
+                      Card.new('J', 'Diamond'), Card.new('10'), Card.new('3'),
+                      Card.new('7', 'Hearts')]
 
     @three_of_a_kind_hand = [Card.new('K', 'Clubs'), Card.new('K'), Card.new('K'),
                              Card.new('8', 'Clubs'), Card.new('4'), Card.new('3'),
@@ -57,10 +58,6 @@ describe Win do
     end
 
     it 'should return the correct index and hands' do
-
-      %w(HighCard OnePair TwoPair ThreeOfKind Straight Flush FullHouse FourOfKind
-              StraightFlush RoyalFlush)
-
       expect(@win.hand_rank(@royal_flush_hand)).to eq ({hand_rank: 9, hand_string: 'RoyalFlush'})
       expect(@win.hand_rank(@straight_flush_hand)).to eq ({hand_rank: 8, hand_string: 'StraightFlush'})
       expect(@win.hand_rank(@four_of_a_kind_hand)).to eq ({hand_rank: 7, hand_string: 'FourOfKind'})
@@ -102,16 +99,16 @@ describe Win do
 
   describe '#is_flush?' do
     it 'should return true for a flush of cards' do
-      expect(@win.is_flush?(@flush_hand)).to eq true
+      expect(@win.is_flush?(@flush_hand).last).to eq true
       other_flush_hand = [Card.new('2'), Card.new('2', 'Clubs'),
                           Card.new('9', 'Clubs'), Card.new('10', 'Clubs'),
                           Card.new('7', 'Clubs'), Card.new('2', 'Hearts'),
                           Card.new('K', 'Clubs')]
-      expect(@win.is_flush?(other_flush_hand)).to eq true
+      expect(@win.is_flush?(other_flush_hand).last).to eq true
     end
 
     it 'should return false for not a flush' do
-      expect(@win.is_flush?(@high_card_hand)).to eq false
+      expect(@win.is_flush?(@high_card_hand).last).to eq false
     end
   end
 

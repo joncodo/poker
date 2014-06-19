@@ -38,6 +38,7 @@ module Sorter
     card_ints = Sorter.convert_cards_to_ints(cards)
     card_ints.sort!
     match_array = [10, 11, 12, 13, 1]
+
     (match_array-card_ints).empty?
   end
 
