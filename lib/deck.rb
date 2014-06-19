@@ -1,4 +1,4 @@
-require_relative 'card.rb'
+require_relative 'card.rb' unless defined?(Card)
 
 class Deck
   attr_accessor :cards

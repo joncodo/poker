@@ -1,4 +1,4 @@
-require 'game.rb'
+require 'game.rb' unless defined?(Game)
 
 describe Game do
   before(:each) do

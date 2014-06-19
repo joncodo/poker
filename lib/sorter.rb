@@ -1,4 +1,4 @@
-require_relative 'deck.rb'
+require_relative 'deck.rb' unless defined?(Deck)
 
 module Sorter
   def self.is_straight?(cards)

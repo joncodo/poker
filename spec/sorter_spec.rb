@@ -1,5 +1,5 @@
-require 'sorter.rb'
-require 'card.rb'
+require 'sorter.rb' unless defined?(Sorter)
+require 'card.rb' unless defined?(Card)
 
 describe Sorter do
   describe '#is_straight?' do

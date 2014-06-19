@@ -1,4 +1,4 @@
-require 'deck.rb'
+require 'deck.rb' unless defined?(Deck)
 
 describe Deck do
   before(:each) do

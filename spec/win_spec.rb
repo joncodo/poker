@@ -1,4 +1,4 @@
-require 'win.rb'
+require 'win.rb' unless defined?(Win)
 
 describe Win do
   before(:each) do

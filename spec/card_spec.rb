@@ -1,4 +1,4 @@
-require 'card.rb'
+require 'card.rb' unless defined?(Card)
 
 describe Card do
   describe Card, '#' do

@@ -1,8 +1,8 @@
-load 'lib/game.rb'
-load 'lib/player.rb'
-load 'lib/deck.rb'
-load 'lib/win.rb'
-load 'lib/sorter.rb'
+load 'lib/game.rb' unless defined?(Game)
+load 'lib/player.rb' unless defined?(Player)
+load 'lib/deck.rb' unless defined?(Deck)
+load 'lib/win.rb' unless defined?(Win)
+load 'lib/sorter.rb' unless defined?(Sorter)
 
 puts 'A new round has started!'
 game = Game.new
