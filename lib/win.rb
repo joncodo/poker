@@ -10,13 +10,57 @@ class Win
     @middle_cards = middle_cards
   end
 
-  def winner_string(player)
-    player.to_s + ' has won the round!'
+  def winner_string
+    p1_hand_rank, p1_hand_string, p1_set_cards, p1_other_cards = hand_rank(@player1.cards)
+    p2_hand_rank, p2_hand_string, p2_set_cards, p2_other_cards = hand_rank(@player2.cards)
+
+    p1_set_rank = hand_set_rank(p1_set_cards)
+    p2_set_rank = hand_set_rank(p2_set_cards)
+
+    p1_other_rank = other_rank(p1_other_cards)
+    p2_other_rank = other_rank(p2_other_cards)
+
+    hand_rank_winner = nil
+    if p1_hand_rank > p2_hand_rank
+      hand_rank_winner = 'Player1'
+    elsif p1_hand_rank < p2_hand_rank
+      hand_rank_winner = 'Player2'
+    end
+
+    set_rank_winner = nil
+    if p1_set_rank > p2_set_rank
+      set_rank_winner = 'Player1'
+    elsif p1_set_rank < p2_set_rank
+      set_rank_winner = 'Player2'
+    end
+
+    other_rank_winner = nil
+    if p1_other_rank > p2_other_rank
+      other_rank_winner = 'Player1'
+    elsif p1_other_rank < p2_other_rank
+      other_rank_winner = 'Player2'
+    end
+
+    winner = hand_rank_winner || set_rank_winner || other_rank_winner
+    if winner == 'Player1'
+      hand_string = p1_hand_string
+    else
+      hand_string = p2_hand_string
+    end
+
+    winner + ' has won the round with ' + hand_string +
+      ' ' + hand_card + ' ' + high_card + ' high!'
+  end
+
+  def hand_set_rank(cards)
+    #returns the rank int
+  end
+
+  def other_rank(cards)
+    #returns the rank int
   end
 
   def hand_rank(cards)
-    #TODO who has the highest flush?
-    #TODO Who has the highest pair
     #TODO TEST these lines and this method is too big
     # cards = @player1.cards + @middle_cards if player == 'Player1'
     # cards = @player2.cards + @middle_cards if player == 'Player2'
@@ -44,10 +88,7 @@ class Win
       index = 0
     end
 
-    #who wins
-    #highest rank - Highest combo in that rank - higest card - second highest card...
-
-    {hand_rank: index, hand_string: Win::HANDS[index]}
+    {hand_rank: index, hand_string: Win::HANDS[index], set_cards: foo, other_cards: foo}
   end
 
   def is_royal_flush?(cards)
@@ -73,7 +114,7 @@ class Win
   end
 
   def is_flush?(cards)
-    is_flush = !flush_suit(cards).nil?
+    return_bool = !flush_suit(cards).nil?
 
     return_cards = case flush_suit(cards)
       when 'Hearts'
@@ -88,7 +129,7 @@ class Win
         []
     end
 
-    [return_cards, is_flush]
+    [return_cards, return_bool]
   end
 
   def is_straight?(cards)
