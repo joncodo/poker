@@ -13,3 +13,5 @@ ruby play.rb
 ---Test it with:
 
 rspec spec
+
+This was made live on twitch.tv/jonny2779
