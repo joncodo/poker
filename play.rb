@@ -16,7 +16,10 @@ puts ''
 puts game.show_cards_string('Player2', game.player2.cards)
 
 game.deal_middle_cards
-puts ''
+puts
+
+
+
 puts game.show_cards_string('Middle', game.middle_cards)
 
 win = Win.new(game.player1, game.player2, game.middle_cards)
